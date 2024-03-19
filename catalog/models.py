@@ -3,8 +3,8 @@ from django.db import models
 NULLABLE = {'null': True, 'blank': True}
 
 
-# Create your models here.
 class Category(models.Model):
+    id = models.CharField(primary_key=True, max_length=100, verbose_name='Номер категории')
     name = models.CharField(max_length=100, verbose_name='Категория продукта')
     description = models.TextField(**NULLABLE, verbose_name='Описание')
 
@@ -14,6 +14,7 @@ class Category(models.Model):
     class Meta:
         verbose_name = 'категория'
         verbose_name_plural = 'категории'
+        ordering = ['id', ]
 
 
 class Product(models.Model):
@@ -31,3 +32,4 @@ class Product(models.Model):
     class Meta:
         verbose_name = 'продукт'
         verbose_name_plural = 'продукты'
+        ordering = ['category', 'pk', ]
