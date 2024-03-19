@@ -1,0 +1,70 @@
+[
+  {
+    "model": "catalog.category",
+    "pk": "1",
+    "fields": {
+      "name": "fruit",
+      "description": null
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": "2",
+    "fields": {
+      "name": "vegetable",
+      "description": null
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 1,
+    "fields": {
+      "name": "lemon",
+      "description": null,
+      "photo": "",
+      "category": "1",
+      "price": 100,
+      "created_at": "2024-03-19T18:25:04.112Z",
+      "updated_at": "2024-03-19T18:25:09.253Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 2,
+    "fields": {
+      "name": "banana",
+      "description": null,
+      "photo": "",
+      "category": "1",
+      "price": 120,
+      "created_at": "2024-03-19T18:25:15.744Z",
+      "updated_at": "2024-03-19T18:25:19.725Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 3,
+    "fields": {
+      "name": "carrot",
+      "description": null,
+      "photo": "",
+      "category": "2",
+      "price": 150,
+      "created_at": "2024-03-19T18:25:26.797Z",
+      "updated_at": "2024-03-19T18:25:47.459Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 4,
+    "fields": {
+      "name": "onion",
+      "description": null,
+      "photo": "",
+      "category": "2",
+      "price": 80,
+      "created_at": "2024-03-19T18:25:52.283Z",
+      "updated_at": "2024-03-19T18:25:56.622Z"
+    }
+  }
+]
