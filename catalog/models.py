@@ -26,7 +26,7 @@ class Product(models.Model):
     photo = models.ImageField(upload_to='products/', **NULLABLE, verbose_name='Изображение')
     category = models.ForeignKey('Category', on_delete=models.CASCADE, verbose_name='Категория продукта')
     price = models.IntegerField(verbose_name='Цена')
-    manufactured_at = models.DateTimeField(default=timezone.now, verbose_name='Дата производства')
+    # manufactured_at = models.DateTimeField(default=timezone.now, verbose_name='Дата производства')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Дата последнего изменения')
 
