@@ -29,11 +29,11 @@
     "fields": {
       "name": "Piston",
       "description": "",
-      "photo": "products/HTB1l81LbYsrBKNjSZFpq6AXhFXaX.jpg.webp",
+      "photo": "catalog/HTB1l81LbYsrBKNjSZFpq6AXhFXaX.jpg.webp",
       "category": "1",
       "price": 10000,
       "created_at": "2024-03-24T18:44:29.516Z",
-      "updated_at": "2024-03-24T18:44:29.516Z"
+      "updated_at": "2024-03-24T21:07:53.690Z"
     }
   },
   {
@@ -42,11 +42,11 @@
     "fields": {
       "name": "Camshaft",
       "description": "",
-      "photo": "products/full_import_files_63_63314a31268011e39d6b0025904b8af3_c6c65e4d469511e7802a0025904b8af3.jpg",
+      "photo": "catalog/full_import_files_63_63314a31268011e39d6b0025904b8af3_c6c65e4d469511e7802a0025904b8af3.jpg",
       "category": "1",
       "price": 7000,
       "created_at": "2024-03-24T18:46:39.073Z",
-      "updated_at": "2024-03-24T18:46:39.073Z"
+      "updated_at": "2024-03-24T21:08:41.026Z"
     }
   },
   {
@@ -55,11 +55,11 @@
     "fields": {
       "name": "Connecting rod",
       "description": "",
-      "photo": "products/carrillo_rod_1__52376.jpg",
+      "photo": "catalog/carrillo_rod_1__52376.jpg",
       "category": "1",
       "price": 9000,
       "created_at": "2024-03-24T18:48:19.761Z",
-      "updated_at": "2024-03-24T18:48:19.761Z"
+      "updated_at": "2024-03-24T21:09:04.010Z"
     }
   },
   {
@@ -68,11 +68,11 @@
     "fields": {
       "name": "Automatic transmission",
       "description": "",
-      "photo": "products/Z2.jpg",
+      "photo": "catalog/Z2.jpg",
       "category": "2",
       "price": 250000,
       "created_at": "2024-03-24T18:50:02.512Z",
-      "updated_at": "2024-03-24T18:50:02.512Z"
+      "updated_at": "2024-03-24T21:09:19.822Z"
     }
   },
   {
@@ -81,11 +81,11 @@
     "fields": {
       "name": "Pallet",
       "description": "",
-      "photo": "products/ZESTAW-CZESCI-WYMIANA-OLEJU-1071-298-038-ZF-Producent-czesci-ZF.jpeg",
+      "photo": "catalog/ZESTAW-CZESCI-WYMIANA-OLEJU-1071-298-038-ZF-Producent-czesci-ZF.jpeg",
       "category": "2",
       "price": 2500,
       "created_at": "2024-03-24T18:52:47.902Z",
-      "updated_at": "2024-03-24T18:52:47.902Z"
+      "updated_at": "2024-03-24T21:09:36.255Z"
     }
   },
   {
@@ -94,11 +94,11 @@
     "fields": {
       "name": "Torque converter",
       "description": "",
-      "photo": "products/sx-slider-torque-converter-pc_w1920.jpg",
+      "photo": "catalog/sx-slider-torque-converter-pc_w1920.jpg",
       "category": "2",
       "price": 25500,
       "created_at": "2024-03-24T18:55:16.661Z",
-      "updated_at": "2024-03-24T18:55:16.661Z"
+      "updated_at": "2024-03-24T21:09:51.123Z"
     }
   },
   {
@@ -107,11 +107,11 @@
     "fields": {
       "name": "Steering tip",
       "description": "",
-      "photo": "products/18033258.webp",
+      "photo": "catalog/18033258.webp",
       "category": "3",
       "price": 2000,
       "created_at": "2024-03-24T18:57:35.409Z",
-      "updated_at": "2024-03-24T18:57:35.409Z"
+      "updated_at": "2024-03-24T21:10:13.048Z"
     }
   },
   {
@@ -120,11 +120,11 @@
     "fields": {
       "name": "Silent block",
       "description": "",
-      "photo": "products/31126763719.jpg",
+      "photo": "catalog/31126763719.jpg",
       "category": "3",
       "price": 1500,
       "created_at": "2024-03-24T19:00:23.596Z",
-      "updated_at": "2024-03-24T19:00:23.596Z"
+      "updated_at": "2024-03-24T21:10:29.748Z"
     }
   },
   {
@@ -133,11 +133,11 @@
     "fields": {
       "name": "Carbon-ceramic brake disc",
       "description": "",
-      "photo": "products/r35-nissan-gtr-carbon-ceramic-brake-kit-8.png.jpg",
+      "photo": "catalog/r35-nissan-gtr-carbon-ceramic-brake-kit-8.png.jpg",
       "category": "3",
       "price": 350000,
       "created_at": "2024-03-24T19:05:01.757Z",
-      "updated_at": "2024-03-24T19:05:01.757Z"
+      "updated_at": "2024-03-24T21:10:41.354Z"
     }
   }
 ]
