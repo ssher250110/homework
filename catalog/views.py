@@ -9,3 +9,11 @@ def product_info(request, pk):
         'product': product,
     }
     return render(request, 'catalog/product_info.html', context)
+
+
+def index(request):
+    product_list = Product.objects.all()
+    context = {
+        'products': product_list,
+    }
+    return render(request, 'catalog/index.html', context)
