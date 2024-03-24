@@ -1,5 +1,11 @@
 {% extends 'catalog/base.html' %}
 {% load my_tags %}
+
+{% block title %}
+    <h2 class="display-3 fw-bold">{{ title }}</h2>
+    <h3 class="fw-normal text-muted mb-3">Auto parts</h3>
+{% endblock %}
+
 {% block content %}
     <div class="album py-5 bg-body-tertiary">
         <div class="container">
