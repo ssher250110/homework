@@ -1,6 +1,11 @@
 from django.shortcuts import render
 
+from catalog.models import Product
 
-# Create your views here.
-def base(request):
-    return render(request, 'base.html')
+
+def product_info(request, pk):
+    product = Product.objects.get(pk=pk)
+    context = {
+        'product': product,
+    }
+    return render(request, 'catalog/product_info.html', context)
