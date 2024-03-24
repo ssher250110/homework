@@ -1,7 +1,4 @@
-
-
 from django.db import models
-from django.utils import timezone
 
 NULLABLE = {'null': True, 'blank': True}
 
