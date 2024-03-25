@@ -6,5 +6,34 @@
 {% endblock %}
 
 {% block content %}
-    {% include 'catalog/includes/product_card.html' %}
+    <div class="album py-5 bg-body-tertiary">
+        <div class="container">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <img class="img-fluid" src="{{ product.photo | mymedia }}"
+                             style="height: 350px;width: auto;">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ product.name }}</h5>
+                            <p class="card-text">{{ product.description }}</p>
+                            <h4 class="card-title pricing-card-title">Price: {{ product.price }}</h4>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">Category product: {{ product.category }}</li>
+                                <li class="list-group-item">Date of creation: {{ product.created_at }}</li>
+                                <li class="list-group-item">Date of update: {{ product.updated_at }}</li>
+                            </ul>
+                            <div class="btn-group">
+                                <a class="btn btn--sm btn-outline-secondary"
+                                   href="{% url 'catalog:index' %}" role="button">Main
+                                </a>
+                                <a class="btn btn--sm btn-outline-secondary"
+                                   href="{% url 'catalog:contact_info' %}" role="button">Contact
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
