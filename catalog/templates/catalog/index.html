@@ -1,0 +1,13 @@
+{% extends 'catalog/base.html' %}
+{% load my_tags %}
+
+{% block title %}
+    <h2 class="display-5 fw-bold">{{ title }}</h2>
+    <h3 class="fw-normal text-muted mb-3">Auto parts</h3>
+{% endblock %}
+
+{% block content %}
+    {% for product in products %}
+        {% include 'catalog/includes/product_card.html' %}
+    {% endfor %}
+{% endblock %}

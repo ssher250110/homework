@@ -1,0 +1,10 @@
+{% extends 'catalog/base.html' %}
+{% load my_tags %}
+
+{% block title %}
+    <h2 class="display-4 fw-bold">{{ title }}</h2>
+{% endblock %}
+
+{% block content %}
+    {% include 'catalog/includes/product_card.html' %}
+{% endblock %}
