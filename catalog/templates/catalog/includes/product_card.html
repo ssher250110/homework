@@ -6,6 +6,7 @@
         </div>
         <div class="card-header py-2">
             <h4 class="card-title pricing-card-title">Price: {{ product.price }}</h4>
+            <p class="text-start m-3">{{ product.description|truncatewords:100 }}</p>
         </div>
         <div class="card-body">
             <img src="{{ product.photo | mymedia }}" class="img-fluid">
