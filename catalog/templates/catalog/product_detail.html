@@ -11,16 +11,16 @@
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                 <div class="col">
                     <div class="card shadow-sm">
-                        <img class="img-fluid" src="{{ product.photo | mymedia }}"
+                        <img class="img-fluid" src="{{ object.photo | mymedia }}"
                              style="height: 350px;width: auto;">
                         <div class="card-body">
-                            <h5 class="card-title">{{ product.name }}</h5>
-                            <p class="card-text">{{ product.description }}</p>
-                            <h4 class="card-title pricing-card-title">Price: {{ product.price }}</h4>
+                            <h5 class="card-title">{{ object.name }}</h5>
+                            <p class="card-text">{{ object.description }}</p>
+                            <h4 class="card-title pricing-card-title">Price: {{ object.price }}</h4>
                             <ul class="list-group list-group-flush">
-                                <li class="list-group-item">Category product: {{ product.category }}</li>
-                                <li class="list-group-item">Date of creation: {{ product.created_at }}</li>
-                                <li class="list-group-item">Date of update: {{ product.updated_at }}</li>
+                                <li class="list-group-item">Category product: {{ object.category }}</li>
+                                <li class="list-group-item">Date of creation: {{ object.created_at }}</li>
+                                <li class="list-group-item">Date of update: {{ object.updated_at }}</li>
                             </ul>
                             <div class="btn-group">
                                 <a class="btn btn--sm btn-outline-secondary"
