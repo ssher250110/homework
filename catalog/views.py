@@ -1,6 +1,17 @@
 from django.shortcuts import render
+from django.views.generic import ListView
 
 from catalog.models import Product
+
+
+class ProductListView(ListView):
+    model = Product
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Main page'
+        context['description'] = 'Auto parts'
+        return context
 
 
 def product_info(request, pk):
@@ -10,16 +21,6 @@ def product_info(request, pk):
         'title': 'Page product',
     }
     return render(request, 'catalog/product_info.html', context)
-
-
-def index(request):
-    product_list = Product.objects.all()
-    context = {
-        'products': product_list,
-        'title': 'Main page',
-        'description': 'Auto parts'
-    }
-    return render(request, 'catalog/index.html', context)
 
 
 def contact_info(request):

@@ -3,7 +3,7 @@
 
 {% block title %}
     <h2 class="display-5 fw-bold">{{ title }}</h2>
-    <h3 class="fw-normal text-muted mb-3">Auto parts</h3>
+    <h3 class="fw-normal text-muted mb-3">{{ description}}</h3>
 {% endblock %}
 
 {% block content %}
@@ -11,23 +11,23 @@
         <div class="album py-5 bg-body-tertiary">
             <div class="container">
                 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                    {% for product in products %}
+                    {% for object in object_list %}
                         <div class="col">
                             <div class="card shadow-sm">
                                 <div class="card-header py-3">
-                                    <h3 class="my-0 fw-normal">{{ product.name }}</h3>
+                                    <h3 class="my-0 fw-normal">{{ object.name }}</h3>
                                 </div>
                                 <div class="card-header py-2">
-                                    <h4 class="card-title pricing-card-title">Price: {{ product.price }}</h4>
-                                    <p class="text-start m-3">{{ product.description|truncatewords:100 }}</p>
+                                    <h4 class="card-title pricing-card-title">Price: {{ object.price }}</h4>
+                                    <p class="text-start m-3">{{ object.description|truncatewords:100 }}</p>
                                 </div>
-                                <img class="img-fluid" src="{{ product.photo | mymedia }}"
+                                <img class="img-fluid" src="{{ object.photo | mymedia }}"
                                      style="height: 350px;width: auto;">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="card-body">
                                         <div class="btn-group">
                                             <a class="btn btn--sm btn-outline-secondary"
-                                               href="{% url 'catalog:product_info' product.id %}" role="button">View
+                                               href="{% url 'catalog:product_info' object.id %}" role="button">View
                                             </a>
                                             <a class="btn btn--sm btn-outline-secondary"
                                                href="{% url 'catalog:contact_info' %}" role="button">Contact
