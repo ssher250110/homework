@@ -3,13 +3,16 @@
 
 {% block title %}
     <h2 class="display-5 fw-bold">{{ title }}</h2>
-    <h3 class="fw-normal text-muted mb-3">{{ description}}</h3>
+    <h3 class="fw-normal text-muted mb-3">{{ description }}</h3>
 {% endblock %}
 
 {% block content %}
     <main>
         <div class="album py-5 bg-body-tertiary">
             <div class="container">
+                <a class="btn btn-primary mb-3"
+                   href="{% url 'catalog:create_product' %}" role="button">Create product
+                </a>
                 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                     {% for object in object_list %}
                         <div class="col">

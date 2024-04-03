@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView
+from django.urls import reverse_lazy
+from django.views.generic import ListView, DetailView, CreateView
 
 from catalog.models import Product
 
@@ -20,6 +21,17 @@ class ProductDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Page product'
+        return context
+
+
+class ProductCreateView(CreateView):
+    model = Product
+    fields = ['name', 'photo', 'category', 'price', ]
+    success_url = reverse_lazy('catalog:index')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Create product'
         return context
 
 
