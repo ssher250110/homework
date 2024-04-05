@@ -34,4 +34,26 @@ class Product(models.Model):
         verbose_name = 'товар'
         verbose_name_plural = 'товары'
         ordering = ['category', 'pk', ]
-        
+
+
+class Blog(models.Model):
+    class Status(models.TextChoices):
+        DRAFT = 'DF', 'Draft'
+        PUBLISHED = 'PB', 'Published'
+
+    title = models.CharField(max_length=250, verbose_name='Заголовок')
+    slug = models.SlugField(max_length=250, verbose_name='Короткая метка')
+    body = models.TextField(**NULLABLE, verbose_name='Содержимое')
+    image = models.ImageField(upload_to='catalog/', **NULLABLE, verbose_name='Изображение')
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
+    status = models.CharField(max_length=2, choices=Status.choices, default=Status.DRAFT)
+    view_count = models.PositiveIntegerField(default=0, verbose_name='Количество просмотров')
+    product = models.ForeignKey('Product', on_delete=models.CASCADE, verbose_name='Блог продукта')
+
+    class Meta:
+        verbose_name = 'Блог'
+        verbose_name_plural = 'Блоги'
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return self.title
