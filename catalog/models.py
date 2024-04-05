@@ -34,3 +34,4 @@ class Product(models.Model):
         verbose_name = 'товар'
         verbose_name_plural = 'товары'
         ordering = ['category', 'pk', ]
+        
