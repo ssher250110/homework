@@ -17,5 +17,6 @@ class ProductAdmin(admin.ModelAdmin):
 
 @admin.register(Blog)
 class BlogAdmin(admin.ModelAdmin):
-    list_display = ('pk', 'title', 'status', 'view_count', 'product')
+    list_display = ('pk', 'title', 'status', 'view_count', 'product', 'created_at')
     prepopulated_fields = {'slug': ('title',)}
+    list_filter = ('product', 'status', 'view_count', 'created_at', )
