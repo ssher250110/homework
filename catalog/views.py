@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
 
-from catalog.models import Product
+from catalog.models import Product, Blog
 
 
 class ProductListView(ListView):
@@ -65,3 +65,12 @@ class ContactView(TemplateView):
         message = request.POST.get('message')
         print(f"Имя: {name}, Номер телефона: {phone}, Сообщение: {message}")
         return render(request, self.template_name)
+
+
+class BlogListView(ListView):
+    model = Blog
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Blog'
+        return context

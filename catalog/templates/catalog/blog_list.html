@@ -1,0 +1,34 @@
+{% extends 'catalog/base.html' %}
+{% load my_tags %}
+{% block title %}
+    <h2 class="display-5 fw-bold">{{ title }}</h2>
+{% endblock %}
+
+{% block content %}
+    <main>
+        <div class="album py-5 bg-body-tertiary">
+            <div class="container-fluid">
+{#                <a class="btn btn-primary mb-3"#}
+{#                   href="{% url 'catalog:create_product' %}" role="button">Create blog#}
+{#                </a>#}
+                <div class="row row-cols-2 row-cols-sm-2 row-cols-md-3 g-4">
+                    {% for object in object_list %}
+                        <div class="col">
+                            <div class="card shadow-sm m-lg-3">
+                                <div class="card-body">
+                                    <div class="card-header py-2">
+                                        <h5 class="my-1 fw-normal">{{ object.title }} (Product:{{ object.product }})</h5>
+                                    </div>
+                                    <div class="card-header py-2">
+                                        <h4 class="card-title pricing-card-title">{{ object.body }}</h4>
+                                        <p class="text-start m-3">{{ object.description|truncatewords:50 }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}
