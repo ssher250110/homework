@@ -23,7 +23,11 @@
                                             (Product: {{ object.product }})</h5>
                                     </div>
                                     <div class="card-header py-2">
-                                        <p class="text-start m-3">{{ object.body|truncatewords:15 }}</p>
+                                        {% if object.body %}
+                                            <p class="text-start m-3">{{ object.body|truncatewords:15 }}</p>
+                                        {% else %}
+                                            Not body
+                                        {% endif %}
                                     </div>
                                     <div class="btn-group">
                                         <a class="btn btn--sm btn-outline-secondary"
