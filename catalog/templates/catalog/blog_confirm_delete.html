@@ -17,7 +17,7 @@
                                 {% csrf_token %}
                                 <button type="submit" class="btn btn--sm btn-danger">Delete</button>
                                 <a class="btn btn--sm btn-outline-secondary"
-                                   href="{% url 'catalog:blog' %}" role="button">Cancel</a>
+                                   href="{% url 'catalog:blog_info' object.pk %}" role="button">Cancel</a>
                             </form>
                         </div>
                     </div>
