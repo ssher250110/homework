@@ -20,7 +20,11 @@
                                         (Product: {{ object.product }})</h5>
                                 </div>
                                 <div class="card-header py-2">
+                                    {% if object.body %}
                                     <p class="text-start m-3">{{ object.body }}</p>
+                                    {% else %}
+                                    Not body
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
