@@ -12,6 +12,11 @@
                 <div class="card">
                     <div class="col">
                         <div class="card shadow-sm m-lg-3">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">Data of creation: {{ object.created_at }}</li>
+                                <li class="list-group-item">Data of published: {{ object.status }}</li>
+                                <li class="list-group-item">Data of count view: {{ object.view_count }}</li>
+                            </ul>
                             <img class="align-self-start" src="{{ object.photo | mymedia }}"
                                  style="height: 200px;width: auto;">
                             <div class="card-body">
@@ -26,11 +31,6 @@
                                         Not body
                                     {% endif %}
                                 </div>
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">Date of creation: {{ object.created_at }}</li>
-                                    <li class="list-group-item">Date of status: {{ object.status }}</li>
-                                    <li class="list-group-item">Date of count view: {{ object.view_count }}</li>
-                                </ul>
                                 <div class="btn-group m-sm-2">
                                     <a class="btn btn--sm btn-outline-secondary"
                                        href="{% url 'catalog:blog' %}"
