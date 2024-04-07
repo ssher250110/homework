@@ -27,13 +27,10 @@
                                         <h4 class="card-title pricing-card-title">Price: {{ object.price }}</h4>
                                         <p class="text-start m-3">{{ object.description|truncatewords:100 }}</p>
                                     </div>
-                                    <div class="btn-group">
+                                    <div class="btn-group m-sm-2">
                                         <a class="btn btn--sm btn-outline-secondary"
                                            href="{% url 'catalog:product_info' object.id %}"
                                            role="button">View
-                                        </a>
-                                        <a class="btn btn--sm btn-outline-secondary"
-                                           href="{% url 'catalog:contact_info' %}" role="button">Contact
                                         </a>
                                     </div>
                                 </div>

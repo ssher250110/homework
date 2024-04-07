@@ -21,10 +21,24 @@
                                 </div>
                                 <div class="card-header py-2">
                                     {% if object.body %}
-                                    <p class="text-start m-3">{{ object.body }}</p>
+                                        <p class="text-start m-3">{{ object.body }}</p>
                                     {% else %}
-                                    Not body
+                                        Not body
                                     {% endif %}
+                                </div>
+                                <div class="btn-group m-sm-2">
+                                    <a class="btn btn--sm btn-outline-secondary"
+                                       href="{% url 'catalog:blog' %}"
+                                       role="button">Main
+                                    </a>
+                                    <a class="btn btn--sm btn-outline-secondary"
+                                       href="{% url 'catalog:update_blog' object.id %}"
+                                       role="button">Update
+                                    </a>
+                                    <a class="btn btn--sm btn-outline-secondary"
+                                       href="{% url 'catalog:delete_blog' object.id %}"
+                                       role="button">Delete
+                                    </a>
                                 </div>
                             </div>
                         </div>
