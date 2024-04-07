@@ -1,0 +1,49 @@
+{% extends 'catalog/base.html' %}
+{% load my_tags %}
+
+{% block title_page %}
+    Product page
+{% endblock %}
+
+
+{% block title %}
+    <h2 class="display-5 fw-bold">{{ title }}</h2>
+    <h3 class="fw-normal text-muted mb-3">{{ description }}</h3>
+{% endblock %}
+
+{% block content %}
+    <main>
+        <div class="album py-5 bg-body-tertiary">
+            <div class="container-fluid">
+                <a class="btn btn-primary mb-3"
+                   href="{% url 'catalog:create_product' %}" role="button">Create product
+                </a>
+                <div class="row row-cols-2 row-cols-sm-2 row-cols-md-3 g-4">
+                    {% for object in object_list %}
+                        <div class="col">
+                            <div class="card shadow-sm">
+                                <img class="img-fluid" src="{{ object.photo | mymedia }}"
+                                     style="height: 300px;width: auto;">
+                                <div class="card-body">
+                                    <div class="card-header py-2">
+                                        <h4 class="my-0 fw-normal">{{ object.name }}</h4>
+                                    </div>
+                                    <div class="card-header py-2">
+                                        <h4 class="card-title pricing-card-title">Price: {{ object.price }}</h4>
+                                        <p class="text-start m-3">{{ object.description|truncatewords:100 }}</p>
+                                    </div>
+                                    <div class="btn-group m-sm-2">
+                                        <a class="btn btn--sm btn-outline-secondary"
+                                           href="{% url 'catalog:product_info' object.id %}"
+                                           role="button">View
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends 'catalog/base.html' %}
+{% load my_tags %}
+
+{% block title_page %}
+    Blog page
+{% endblock %}
+
+{% block title %}
+    <h2 class="display-5 fw-bold">{{ title }}</h2>
+{% endblock %}
+
+{% block content %}
+    <main>
+        <div class="album py-5 bg-body-tertiary">
+            <div class="container-fluid">
+                <a class="btn btn-primary mb-3"
+                   href="{% url 'catalog:create_blog' %}" role="button">Create blog
+                </a>
+                <div class="card">
+                    {% for object in object_list %}
+                        <div class="col">
+                            <div class="card shadow-sm m-lg-3">
+                                <img class="align-self-start" src="{{ object.photo | mymedia }}"
+                                     style="height: 100px;width: auto;">
+                                <div class="card-body">
+                                    <div class="card-header py-2">
+                                        <h5 class="my-1 fw-normal">{{ object.title }}
+                                            (Product: {{ object.product }})</h5>
+                                    </div>
+                                    <div class="card-header py-2">
+                                        {% if object.body %}
+                                            <p class="text-start m-3">{{ object.body|truncatewords:15 }}</p>
+                                        {% else %}
+                                            Not body
+                                        {% endif %}
+                                    </div>
+                                    <div class="btn-group m-sm-2">
+                                        <a class="btn btn--sm btn-outline-secondary"
+                                           href="{% url 'catalog:blog_info' object.id %}"
+                                           role="button">View
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}

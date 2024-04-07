@@ -1,0 +1,59 @@
+{% extends 'catalog/base.html' %}
+{% load my_tags %}
+
+{% block title_page %}
+    {{ object.slug }}
+{% endblock %}
+
+{% block title %}
+    <h2 class="display-5 fw-bold">{{ title }}</h2>
+{% endblock %}
+
+{% block content %}
+    <main>
+        <div class="album py-5 bg-body-tertiary">
+            <div class="container-fluid">
+                <div class="card">
+                    <div class="col">
+                        <div class="card shadow-sm m-lg-3">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">Data of creation: {{ object.created_at }}</li>
+                                <li class="list-group-item">Data of published: {{ object.status }}</li>
+                                <li class="list-group-item">Data of count view: {{ object.view_count }}</li>
+                            </ul>
+                            <img class="align-self-start" src="{{ object.photo | mymedia }}"
+                                 style="height: 200px;width: auto;">
+                            <div class="card-body">
+                                <div class="card-header py-2">
+                                    <h5 class="my-1 fw-normal">{{ object.title }}
+                                        (Product: {{ object.product }})</h5>
+                                </div>
+                                <div class="card-header py-2">
+                                    {% if object.body %}
+                                        <p class="text-start m-3">{{ object.body }}</p>
+                                    {% else %}
+                                        Not body
+                                    {% endif %}
+                                </div>
+                                <div class="btn-group m-sm-2">
+                                    <a class="btn btn--sm btn-outline-secondary"
+                                       href="{% url 'catalog:blog' %}"
+                                       role="button">Main
+                                    </a>
+                                    <a class="btn btn--sm btn-outline-secondary"
+                                       href="{% url 'catalog:update_blog' object.id %}"
+                                       role="button">Update
+                                    </a>
+                                    <a class="btn btn--sm btn-outline-secondary"
+                                       href="{% url 'catalog:delete_blog' object.id %}"
+                                       role="button">Delete
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}
