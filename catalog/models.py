@@ -38,7 +38,7 @@ class Product(models.Model):
 class Blog(models.Model):
 
     title = models.CharField(max_length=250, verbose_name='Заголовок')
-    slug = models.SlugField(max_length=250, verbose_name='Короткая метка')
+    slug = models.SlugField(max_length=250, unique=True, verbose_name='Короткая метка')
     body = models.TextField(**NULLABLE, verbose_name='Содержимое')
     image = models.ImageField(upload_to='catalog/', **NULLABLE, verbose_name='Изображение')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
