@@ -11,12 +11,12 @@
                 <a class="btn btn-primary mb-3"
                    href="{% url 'catalog:create_blog' %}" role="button">Create blog
                 </a>
-                <div class="row row-cols-2 row-cols-sm-2 row-cols-md-3 g-4">
+                <div class="card">
                     {% for object in object_list %}
                         <div class="col">
                             <div class="card shadow-sm m-lg-3">
-                                <img class="img-fluid" src="{{ object.photo | mymedia }}"
-                                     style="height: 250px;width: auto;">
+                                <img class="align-self-start" src="{{ object.photo | mymedia }}"
+                                     style="height: 100px;width: auto;">
                                 <div class="card-body">
                                     <div class="card-header py-2">
                                         <h5 class="my-1 fw-normal">{{ object.title }}
