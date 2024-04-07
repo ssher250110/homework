@@ -8,6 +8,9 @@
     <main>
         <div class="album py-5 bg-body-tertiary">
             <div class="container-fluid">
+                <a class="btn btn-primary mb-3"
+                   href="{% url 'catalog:create_blog' %}" role="button">Create blog
+                </a>
                 <div class="row row-cols-2 row-cols-sm-2 row-cols-md-3 g-4">
                     {% for object in object_list %}
                         <div class="col">
