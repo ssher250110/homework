@@ -30,8 +30,13 @@
                                         Create
                                     {% endif %}
                                 </button>
-                                <a class="btn btn--sm btn-outline-secondary"
+                                {% if object %}
+                                    <a class="btn btn--sm btn-outline-secondary"
                                    href="{% url 'catalog:blog_info' object.pk %}" role="button">Cancel</a>
+                                {% else %}
+                                    <a class="btn btn--sm btn-outline-secondary"
+                                   href="{% url 'catalog:blog' %}" role="button">Cancel</a>
+                                {% endif %}
                             </form>
                         </div>
                     </div>
