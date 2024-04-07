@@ -87,7 +87,18 @@ class BlogDetailView(DetailView):
 
 class BlogCreateView(CreateView):
     model = Blog
-    fields = ['title', 'image', 'status', 'product',]
+    fields = ['title', 'image', 'status', 'product', ]
+    success_url = reverse_lazy('catalog:blog')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Create blog'
+        return context
+
+
+class BlogUpdateView(UpdateView):
+    model = Blog
+    fields = ['title', 'image', 'status', 'product', ]
     success_url = reverse_lazy('catalog:blog')
 
     def get_context_data(self, **kwargs):
