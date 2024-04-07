@@ -75,6 +75,11 @@ class BlogListView(ListView):
         context['title'] = 'Blog'
         return context
 
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        queryset = queryset.filter(status=True)
+        return queryset
+
 
 class BlogDetailView(DetailView):
     model = Blog
