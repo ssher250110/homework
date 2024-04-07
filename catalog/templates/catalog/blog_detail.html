@@ -9,11 +9,11 @@
     <main>
         <div class="album py-5 bg-body-tertiary">
             <div class="container-fluid">
-                <div class="row row-cols-2 row-cols-sm-2 row-cols-md-3 g-4">
+                <div class="card">
                     <div class="col">
                         <div class="card shadow-sm m-lg-3">
-                            <img class="img-fluid" src="{{ object.photo | mymedia }}"
-                                 style="height: 250px;width: auto;">
+                            <img class="align-self-start" src="{{ object.photo | mymedia }}"
+                                 style="height: 200px;width: auto;">
                             <div class="card-body">
                                 <div class="card-header py-2">
                                     <h5 class="my-1 fw-normal">{{ object.title }}
