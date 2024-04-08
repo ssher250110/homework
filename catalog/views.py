@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
+from django.utils.text import slugify
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
 
 from catalog.models import Product, Blog
@@ -105,6 +106,13 @@ class BlogCreateView(CreateView):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Create blog'
         return context
+
+    def form_valid(self, form):
+        if form.is_valid():
+            blog = form.save()
+            blog.slug = slugify(blog.title)
+            blog.save()
+        return super().form_valid(form)
 
 
 class BlogUpdateView(UpdateView):
