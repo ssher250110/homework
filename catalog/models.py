@@ -6,7 +6,7 @@ NULLABLE = {'null': True, 'blank': True}
 class Category(models.Model):
     id = models.CharField(primary_key=True, max_length=100, verbose_name='Номер категории')
     name = models.CharField(max_length=100, verbose_name='Категория продукта')
-    description = models.TextField(verbose_name='Описание')
+    description = models.TextField(**NULLABLE, verbose_name='Описание')
 
     def __str__(self):
         return f'{self.name}'
@@ -19,7 +19,7 @@ class Category(models.Model):
 
 class Product(models.Model):
     name = models.CharField(max_length=100, verbose_name='Товар')
-    description = models.TextField(verbose_name='Описание')
+    description = models.TextField(**NULLABLE, verbose_name='Описание')
     photo = models.ImageField(upload_to='catalog/', **NULLABLE, verbose_name='Изображение')
     category = models.ForeignKey('Category', on_delete=models.CASCADE, verbose_name='Категория товара')
     price = models.IntegerField(verbose_name='Цена')
@@ -36,7 +36,6 @@ class Product(models.Model):
 
 
 class Blog(models.Model):
-
     title = models.CharField(max_length=250, verbose_name='Заголовок')
     slug = models.SlugField(max_length=250, unique=True, verbose_name='Короткая метка')
     body = models.TextField(**NULLABLE, verbose_name='Содержимое')
@@ -53,3 +52,17 @@ class Blog(models.Model):
 
     def __str__(self):
         return self.title
+
+
+# class Version(models.Model):
+#     product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name='Продукт')
+#     number_version = models.IntegerField(verbose_name='Номер версии')
+#     name_version = models.CharField(max_length=100, verbose_name='Название версии')
+#     is_active_version = models.BooleanField(default=True, verbose_name='Активная версия')
+#
+#     def __str__(self):
+#         return f'{self.product}, {self.name_version} - {self.number_version}'
+#
+#     class Meta:
+#         verbose_name = 'Версия'
+#         verbose_name_plural = 'Версии'
