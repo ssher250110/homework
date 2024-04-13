@@ -54,15 +54,15 @@ class Blog(models.Model):
         return self.title
 
 
-# class Version(models.Model):
-#     product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name='Продукт')
-#     number_version = models.IntegerField(verbose_name='Номер версии')
-#     name_version = models.CharField(max_length=100, verbose_name='Название версии')
-#     is_active_version = models.BooleanField(default=True, verbose_name='Активная версия')
-#
-#     def __str__(self):
-#         return f'{self.product}, {self.name_version} - {self.number_version}'
-#
-#     class Meta:
-#         verbose_name = 'Версия'
-#         verbose_name_plural = 'Версии'
+class Version(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name='Продукт')
+    number_version = models.FloatField(verbose_name='Номер версии')
+    name_version = models.CharField(max_length=100, verbose_name='Название версии')
+    is_active_version = models.BooleanField(default=True, verbose_name='Активная версия')
+
+    def __str__(self):
+        return f'{self.product}, {self.name_version} - {self.number_version}'
+
+    class Meta:
+        verbose_name = 'Версия'
+        verbose_name_plural = 'Версии'
