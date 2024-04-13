@@ -28,12 +28,12 @@
     "pk": 1,
     "fields": {
       "name": "Piston",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "description": "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \"Lorem ipsum dolor sit amet..\", comes from a line in section 1.10.32.",
       "photo": "catalog/HTB1l81LbYsrBKNjSZFpq6AXhFXaX.jpg_D5qXDOY.webp",
       "category": "1",
       "price": 15000,
       "created_at": "2024-04-12T17:22:18.679Z",
-      "updated_at": "2024-04-12T18:27:21.430Z"
+      "updated_at": "2024-04-13T16:33:37.156Z"
     }
   },
   {
@@ -41,12 +41,12 @@
     "pk": 2,
     "fields": {
       "name": "Automatic transmission",
-      "description": null,
+      "description": "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \"Lorem ipsum dolor sit amet..\", comes from a line in section 1.10.32.",
       "photo": "catalog/Z2.jpg",
       "category": "2",
       "price": 250000,
       "created_at": "2024-04-12T17:23:05.297Z",
-      "updated_at": "2024-04-12T17:23:05.297Z"
+      "updated_at": "2024-04-13T16:33:53.935Z"
     }
   },
   {
@@ -54,12 +54,42 @@
     "pk": 3,
     "fields": {
       "name": "Сarbon-ceramic brake disc",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "description": "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \"Lorem ipsum dolor sit amet..\", comes from a line in section 1.10.32.",
       "photo": "catalog/r35-nissan-gtr-carbon-ceramic-brake-kit-8.png.jpg",
       "category": "3",
       "price": 300000,
       "created_at": "2024-04-12T17:24:14.785Z",
-      "updated_at": "2024-04-12T18:30:45.499Z"
+      "updated_at": "2024-04-13T16:34:19.121Z"
+    }
+  },
+  {
+    "model": "catalog.version",
+    "pk": 5,
+    "fields": {
+      "product": 1,
+      "number_version": 1.2,
+      "name_version": "Standart",
+      "is_active_version": true
+    }
+  },
+  {
+    "model": "catalog.version",
+    "pk": 6,
+    "fields": {
+      "product": 2,
+      "number_version": 2.0,
+      "name_version": "Standart 2",
+      "is_active_version": false
+    }
+  },
+  {
+    "model": "catalog.version",
+    "pk": 7,
+    "fields": {
+      "product": 3,
+      "number_version": 3.2,
+      "name_version": "Ultra",
+      "is_active_version": true
     }
   }
 ]
