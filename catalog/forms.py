@@ -31,3 +31,9 @@ class VersionForm(forms.ModelForm):
     class Meta:
         model = Version
         fields = '__all__'
+
+    def clean_number_version(self):
+        cleaned_data = self.cleaned_data['number_version']
+        if cleaned_data < 0:
+            raise forms.ValidationError('Номер версии не может быть меньше 0')
+        return cleaned_data
