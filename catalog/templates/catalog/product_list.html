@@ -33,12 +33,8 @@
                                         <p class="text-start m-3">{{ object.description|truncatewords:100 }}</p>
                                     </div>
                                     <div class="card-header py-2">
-                                        {% for version in object.version_set.all %}
-                                            {% if version.is_active_version %}
-                                                <p class="card-text">Name version: {{ version.name_version }}</p>
-                                                <p class="card-text">number version: {{ version.number_version }}</p>
-                                            {% endif %}
-                                        {% endfor %}
+                                        <p class="card-text">Name version: {{ object.version.name_version }}</p>
+                                        <p class="card-text">Number version: {{ object.version.number_version }}</p>
                                     </div>
                                     <div class="btn-group m-sm-2">
                                         <a class="btn btn--sm btn-outline-secondary"
