@@ -32,6 +32,10 @@
                                         <h4 class="card-title pricing-card-title">Price: {{ object.price }}</h4>
                                         <p class="text-start m-3">{{ object.description|truncatewords:100 }}</p>
                                     </div>
+                                    <div class="card-header py-2">
+                                        <p class="card-text">Name version: {{ object.version.name_version }}</p>
+                                        <p class="card-text">Number version: {{ object.version.number_version }}</p>
+                                    </div>
                                     <div class="btn-group m-sm-2">
                                         <a class="btn btn--sm btn-outline-secondary"
                                            href="{% url 'catalog:product_info' object.id %}"

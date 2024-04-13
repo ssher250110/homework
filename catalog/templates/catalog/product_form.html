@@ -16,11 +16,11 @@
 {% block content %}
     <div class="album py-5 bg-body-tertiary">
         <div class="container">
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                <div class="col">
-                    <div class="card shadow-sm">
-                        <div class="card-body">
-                            <form method="post" enctype="multipart/form-data">
+            <form method="post" enctype="multipart/form-data">
+                <div class="row row-cols-1 row-cols-sm-2 row-cols g-2">
+                    <div class="col">
+                        <div class="card shadow-sm">
+                            <div class="card-body">
                                 {% csrf_token %}
                                 {{ form.as_p }}
                                 <button type="submit" class="btn btn-outline-success">
@@ -30,11 +30,26 @@
                                         Create
                                     {% endif %}
                                 </button>
-                            </form>
+                            </div>
                         </div>
                     </div>
+                    {% if object %}
+                        <div class="col">
+                            <div class="card shadow-sm">
+                                <div class="card-body">
+                                    {{ formset.management_form }}
+                                    {% for form in formset %}
+                                        {{ form.as_p }}
+                                        {% if not forloop.last %}
+                                            <hr>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 {% endblock %}

@@ -1,9 +1,11 @@
+from django.forms import inlineformset_factory
 from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
 from django.utils.text import slugify
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
 
-from catalog.models import Product, Blog
+from catalog.forms import ProductForm, VersionForm
+from catalog.models import Product, Blog, Version
 
 
 class ProductListView(ListView):
@@ -13,6 +15,8 @@ class ProductListView(ListView):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Main page'
         context['description'] = 'Auto parts'
+        for product in context.get('object_list'):
+            product.version = product.version_set.filter(is_active_version=True).first()
         return context
 
 
@@ -22,12 +26,14 @@ class ProductDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Page product'
+        version = self.object.version_set.filter(is_active_version=True).first()
+        context['version'] = version
         return context
 
 
 class ProductCreateView(CreateView):
     model = Product
-    fields = ['name', 'photo', 'category', 'price', ]
+    form_class = ProductForm
     success_url = reverse_lazy('catalog:index')
 
     def get_context_data(self, **kwargs):
@@ -38,13 +44,32 @@ class ProductCreateView(CreateView):
 
 class ProductUpdateView(UpdateView):
     model = Product
-    fields = ['name', 'photo', 'category', 'price', ]
-    success_url = reverse_lazy('catalog:index')
+    form_class = ProductForm
+
+    def get_success_url(self):
+        return reverse('catalog:product_info', args=[self.kwargs.get('pk')])
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Update product'
+        VersionFormset = inlineformset_factory(Product, Version, form=VersionForm, extra=1)
+        if self.request.method == 'POST':
+            context['formset'] = VersionFormset(self.request.POST, instance=self.object)
+        else:
+            context['formset'] = VersionFormset(instance=self.object)
         return context
+
+    def form_valid(self, form):
+        context = self.get_context_data()
+        formset = context['formset']
+
+        if form.is_valid() and formset.is_valid():
+            self.object = form.save()
+            formset.instance = self.object
+            formset.save()
+            return super().form_valid(form)
+        else:
+            return self.render_to_response(self.get_context_data(form=form, formset=formset))
 
 
 class ProductDeleteView(DeleteView):
