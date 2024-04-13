@@ -2,7 +2,7 @@ import re
 
 from django import forms
 
-from catalog.models import Product
+from catalog.models import Product, Version
 
 exclude_words = ['казино', 'криптовалюта', 'крипта', 'биржа', 'дешево', 'бесплатно', 'обман', 'полиция', 'радар']
 
@@ -25,3 +25,9 @@ class ProductForm(forms.ModelForm):
             if re.search(data_word, cleaned_data.lower(), flags=re.S) is not None:
                 raise forms.ValidationError(f'Описание товара содержит запрещенное слово - {data_word}')
         return cleaned_data
+
+
+class VersionForm(forms.ModelForm):
+    class Meta:
+        model = Version
+        fields = '__all__'
