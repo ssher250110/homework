@@ -12,6 +12,8 @@ class User(AbstractUser):
                                help_text='Загрузите свой аватар')
     country = models.CharField(max_length=50, **NULLABLE, verbose_name='Страна', help_text='Введите название страны')
 
+    token = models.CharField(max_length=100, **NULLABLE, verbose_name='Токен')
+
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
