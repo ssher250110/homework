@@ -126,7 +126,8 @@ class BlogDetailView(DetailView):
         return self.object
 
 
-class BlogCreateView(CreateView):
+class BlogCreateView(LoginRequiredMixin, CreateView):
+    login_url = 'users:login'
     model = Blog
     fields = ['title', 'image', 'status', 'product', ]
     success_url = reverse_lazy('catalog:blog')
@@ -144,7 +145,8 @@ class BlogCreateView(CreateView):
         return super().form_valid(form)
 
 
-class BlogUpdateView(UpdateView):
+class BlogUpdateView(LoginRequiredMixin, UpdateView):
+    login_url = 'users:login'
     model = Blog
     fields = ['title', 'image', 'status', 'product', ]
 
@@ -157,7 +159,8 @@ class BlogUpdateView(UpdateView):
         return reverse('catalog:blog_info', args=[self.object.product.pk])
 
 
-class BlogDeleteView(DeleteView):
+class BlogDeleteView(LoginRequiredMixin, DeleteView):
+    login_url = 'users:login'
     model = Blog
     success_url = reverse_lazy('catalog:blog')
 
