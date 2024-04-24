@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.forms import inlineformset_factory
 from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
@@ -31,7 +32,8 @@ class ProductDetailView(DetailView):
         return context
 
 
-class ProductCreateView(CreateView):
+class ProductCreateView(LoginRequiredMixin, CreateView):
+    login_url = 'users:login'
     model = Product
     form_class = ProductForm
     success_url = reverse_lazy('catalog:index')
@@ -41,8 +43,15 @@ class ProductCreateView(CreateView):
         context['title'] = 'Create product'
         return context
 
+    def form_valid(self, form):
+        product = form.save()
+        product.owner = self.request.user
+        product.save()
+        return super().form_valid(form)
 
-class ProductUpdateView(UpdateView):
+
+class ProductUpdateView(LoginRequiredMixin, UpdateView):
+    login_url = 'users:login'
     model = Product
     form_class = ProductForm
 
@@ -72,7 +81,8 @@ class ProductUpdateView(UpdateView):
             return self.render_to_response(self.get_context_data(form=form, formset=formset))
 
 
-class ProductDeleteView(DeleteView):
+class ProductDeleteView(LoginRequiredMixin, DeleteView):
+    login_url = 'users:login'
     model = Product
     success_url = reverse_lazy('catalog:index')
 
@@ -122,7 +132,8 @@ class BlogDetailView(DetailView):
         return self.object
 
 
-class BlogCreateView(CreateView):
+class BlogCreateView(LoginRequiredMixin, CreateView):
+    login_url = 'users:login'
     model = Blog
     fields = ['title', 'image', 'status', 'product', ]
     success_url = reverse_lazy('catalog:blog')
@@ -140,7 +151,8 @@ class BlogCreateView(CreateView):
         return super().form_valid(form)
 
 
-class BlogUpdateView(UpdateView):
+class BlogUpdateView(LoginRequiredMixin, UpdateView):
+    login_url = 'users:login'
     model = Blog
     fields = ['title', 'image', 'status', 'product', ]
 
@@ -153,7 +165,8 @@ class BlogUpdateView(UpdateView):
         return reverse('catalog:blog_info', args=[self.object.product.pk])
 
 
-class BlogDeleteView(DeleteView):
+class BlogDeleteView(LoginRequiredMixin, DeleteView):
+    login_url = 'users:login'
     model = Blog
     success_url = reverse_lazy('catalog:blog')
 
