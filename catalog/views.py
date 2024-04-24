@@ -43,6 +43,12 @@ class ProductCreateView(LoginRequiredMixin, CreateView):
         context['title'] = 'Create product'
         return context
 
+    def form_valid(self, form):
+        product = form.save()
+        product.owner = self.request.user
+        product.save()
+        return super().form_valid(form)
+
 
 class ProductUpdateView(LoginRequiredMixin, UpdateView):
     login_url = 'users:login'
