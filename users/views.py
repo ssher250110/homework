@@ -44,3 +44,18 @@ class UserResetPasswordView(FormView):
     model = User
     form_class = PasswordResetForm
     success_url = reverse_lazy('users:login')
+
+    def form_valid(self, form):
+        email = form.cleaned_data['email']
+        random_password = secrets.token_hex(16)
+        for user in form.get_users(email):
+            user.set_password(random_password)
+            user.save()
+        send_mail(
+            subject='Password reset',
+            message=f'Hello your password {random_password}',
+            from_email=EMAIL_HOST_USER,
+            recipient_list=[email],
+        )
+
+        return super().form_valid(form)
