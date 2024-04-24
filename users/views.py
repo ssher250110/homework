@@ -1,9 +1,10 @@
 import secrets
 
+from django.contrib.auth.forms import PasswordResetForm
 from django.core.mail import send_mail
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy, reverse
-from django.views.generic import CreateView
+from django.views.generic import CreateView, FormView
 
 from config.settings import EMAIL_HOST_USER
 from users.forms import UserRegisterForm
@@ -37,3 +38,9 @@ class UserCreateView(CreateView):
         user.is_active = True
         user.save()
         return redirect(reverse('users:login'))
+
+
+class UserResetPasswordView(FormView):
+    model = User
+    form_class = PasswordResetForm
+    success_url = reverse_lazy('users:login')
