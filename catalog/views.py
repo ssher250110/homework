@@ -37,14 +37,10 @@ class ProductCreateView(LoginRequiredMixin, CreateView):
     model = Product
     form_class = ProductForm
     success_url = reverse_lazy('catalog:index')
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['title'] = 'Create product'
-        return context
+    extra_context = {'title': 'Create product'}
 
     def form_valid(self, form):
-        product = form.save()
+        product = form.save(commit=False)
         product.owner = self.request.user
         product.save()
         return super().form_valid(form)
@@ -85,11 +81,7 @@ class ProductDeleteView(LoginRequiredMixin, DeleteView):
     login_url = 'users:login'
     model = Product
     success_url = reverse_lazy('catalog:index')
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['title'] = 'Delete product'
-        return context
+    extra_context = {'title': 'Delete product'}
 
 
 class ContactView(TemplateView):
@@ -145,7 +137,7 @@ class BlogCreateView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         if form.is_valid():
-            blog = form.save()
+            blog = form.save(commit=False)
             blog.slug = slugify(blog.title)
             blog.save()
         return super().form_valid(form)
