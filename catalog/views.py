@@ -22,7 +22,8 @@ class ProductListView(ListView):
         return context
 
 
-class ProductDetailView(DetailView):
+class ProductDetailView(LoginRequiredMixin, DetailView):
+    login_url = 'users:login'
     model = Product
 
     def get_context_data(self, **kwargs):
