@@ -1,11 +1,12 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.exceptions import PermissionDenied
 from django.forms import inlineformset_factory
 from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
 from django.utils.text import slugify
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
 
-from catalog.forms import ProductForm, VersionForm
+from catalog.forms import ProductForm, ProductModeratorForm, VersionForm
 from catalog.models import Product, Blog, Version
 
 
@@ -21,7 +22,8 @@ class ProductListView(ListView):
         return context
 
 
-class ProductDetailView(DetailView):
+class ProductDetailView(LoginRequiredMixin, DetailView):
+    login_url = 'users:login'
     model = Product
 
     def get_context_data(self, **kwargs):
@@ -37,14 +39,10 @@ class ProductCreateView(LoginRequiredMixin, CreateView):
     model = Product
     form_class = ProductForm
     success_url = reverse_lazy('catalog:index')
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['title'] = 'Create product'
-        return context
+    extra_context = {'title': 'Create product'}
 
     def form_valid(self, form):
-        product = form.save()
+        product = form.save(commit=False)
         product.owner = self.request.user
         product.save()
         return super().form_valid(form)
@@ -79,17 +77,21 @@ class ProductUpdateView(LoginRequiredMixin, UpdateView):
             return super().form_valid(form)
         else:
             return self.render_to_response(self.get_context_data(form=form, formset=formset))
+        
+    def get_form_class(self):
+        user = self.request.user
+        if user == self.object.owner:
+            return ProductForm
+        if user.has_perm('catalog.cancel_is_published') and user.has_perm('catalog.edit_description') and user.has_perm('catalog.edit_category'):
+            return ProductModeratorForm
+        raise PermissionDenied
 
 
 class ProductDeleteView(LoginRequiredMixin, DeleteView):
     login_url = 'users:login'
     model = Product
     success_url = reverse_lazy('catalog:index')
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['title'] = 'Delete product'
-        return context
+    extra_context = {'title': 'Delete product'}
 
 
 class ContactView(TemplateView):
@@ -145,7 +147,7 @@ class BlogCreateView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         if form.is_valid():
-            blog = form.save()
+            blog = form.save(commit=False)
             blog.slug = slugify(blog.title)
             blog.save()
         return super().form_valid(form)
