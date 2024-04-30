@@ -32,10 +32,14 @@
                                 <a class="btn btn--sm btn-outline-secondary"
                                    href="{% url 'catalog:index' %}" role="button">Main
                                 </a>
+                                {% if perms.catalog.cancel_is_published and perms.catalog.edit_description and perms.catalog.edit_category or user == product.owner %}
                                 <a class="btn btn--sm btn-outline-secondary"
                                    href="{% url 'catalog:update_product' object.id %}" role="button">Update</a>
+                                {% endif %}
+                                {% if user.is_superuser%}
                                 <a class="btn btn--sm btn-outline-secondary"
                                    href="{% url 'catalog:delete_product' object.id %}" role="button">Delete</a>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
