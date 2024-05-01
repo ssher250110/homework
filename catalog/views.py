@@ -1,5 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
+from django.db.models.query import QuerySet
 from django.forms import inlineformset_factory
 from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
@@ -12,6 +13,11 @@ from catalog.models import Product, Blog, Version
 
 class ProductListView(ListView):
     model = Product
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        queryset = queryset.filter(is_published=True)
+        return queryset
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
