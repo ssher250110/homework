@@ -64,21 +64,23 @@ class ProductUpdateView(LoginRequiredMixin, UpdateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Update product'
-        VersionFormset = inlineformset_factory(Product, Version, form=VersionForm, extra=1)
-        if self.request.method == 'POST':
-            context['formset'] = VersionFormset(self.request.POST, instance=self.object)
-        else:
-            context['formset'] = VersionFormset(instance=self.object)
+        if not self.request.user.groups.filter(name='moderator').exists():
+            VersionFormset = inlineformset_factory(Product, Version, form=VersionForm, extra=1)
+            if self.request.method == 'POST':
+                context['formset'] = VersionFormset(self.request.POST, instance=self.object)
+            else:
+                context['formset'] = VersionFormset(instance=self.object)
         return context
 
     def form_valid(self, form):
         context = self.get_context_data()
-        formset = context['formset']
+        formset = context.get('formset')
 
-        if form.is_valid() and formset.is_valid():
+        if form.is_valid():
             self.object = form.save()
-            formset.instance = self.object
-            formset.save()
+            if formset and formset.is_valid():
+                formset.instance = self.object
+                formset.save()
             return super().form_valid(form)
         else:
             return self.render_to_response(self.get_context_data(form=form, formset=formset))
