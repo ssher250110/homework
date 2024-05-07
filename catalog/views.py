@@ -20,31 +20,29 @@ class ProductListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Main page'
-        context['description'] = 'Auto parts'
-        for product in context.get('object_list'):
+        context["title"] = "Main page"
+        context["description"] = "Auto parts"
+        for product in context.get("object_list"):
             product.version = product.version_set.filter(is_active_version=True).first()
         return context
 
 
 class ProductDetailView(LoginRequiredMixin, DetailView):
-    login_url = 'users:login'
     model = Product
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Page product'
+        context["title"] = "Page product"
         version = self.object.version_set.filter(is_active_version=True).first()
-        context['version'] = version
+        context["version"] = version
         return context
 
 
 class ProductCreateView(LoginRequiredMixin, CreateView):
-    login_url = 'users:login'
     model = Product
     form_class = ProductForm
-    success_url = reverse_lazy('catalog:index')
-    extra_context = {'title': 'Create product'}
+    success_url = reverse_lazy("catalog:index")
+    extra_context = {"title": "Create product"}
 
     def form_valid(self, form):
         product = form.save(commit=False)
@@ -54,27 +52,26 @@ class ProductCreateView(LoginRequiredMixin, CreateView):
 
 
 class ProductUpdateView(LoginRequiredMixin, UpdateView):
-    login_url = 'users:login'
     model = Product
     form_class = ProductForm
 
     def get_success_url(self):
-        return reverse('catalog:product_info', args=[self.kwargs.get('pk')])
+        return reverse("catalog:product_info", args=[self.kwargs.get("pk")])
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Update product'
-        if not self.request.user.groups.filter(name='moderator').exists():
+        context["title"] = "Update product"
+        if not self.request.user.groups.filter(name="moderator").exists():
             VersionFormset = inlineformset_factory(Product, Version, form=VersionForm, extra=1)
-            if self.request.method == 'POST':
-                context['formset'] = VersionFormset(self.request.POST, instance=self.object)
+            if self.request.method == "POST":
+                context["formset"] = VersionFormset(self.request.POST, instance=self.object)
             else:
-                context['formset'] = VersionFormset(instance=self.object)
+                context["formset"] = VersionFormset(instance=self.object)
         return context
 
     def form_valid(self, form):
         context = self.get_context_data()
-        formset = context.get('formset')
+        formset = context.get("formset")
 
         if form.is_valid():
             self.object = form.save()
@@ -84,30 +81,33 @@ class ProductUpdateView(LoginRequiredMixin, UpdateView):
             return super().form_valid(form)
         else:
             return self.render_to_response(self.get_context_data(form=form, formset=formset))
-        
+
     def get_form_class(self):
         user = self.request.user
         if user == self.object.owner:
             return ProductForm
-        if user.has_perm('catalog.cancel_is_published') and user.has_perm('catalog.edit_description') and user.has_perm('catalog.edit_category'):
+        if (
+            user.has_perm("catalog.cancel_is_published")
+            and user.has_perm("catalog.edit_description")
+            and user.has_perm("catalog.edit_category")
+        ):
             return ProductModeratorForm
         raise PermissionDenied
 
 
 class ProductDeleteView(LoginRequiredMixin, DeleteView):
-    login_url = 'users:login'
     model = Product
-    success_url = reverse_lazy('catalog:index')
-    extra_context = {'title': 'Delete product'}
+    success_url = reverse_lazy("catalog:index")
+    extra_context = {"title": "Delete product"}
 
 
 class ContactView(TemplateView):
-    template_name = 'catalog/contact_info.html'
+    template_name = "catalog/contact_info.html"
 
     def post(self, request, *args, **kwargs):
-        name = request.POST.get('name')
-        phone = request.POST.get('phone')
-        message = request.POST.get('message')
+        name = request.POST.get("name")
+        phone = request.POST.get("phone")
+        message = request.POST.get("message")
         print(f"Имя: {name}, Номер телефона: {phone}, Сообщение: {message}")
         return render(request, self.template_name)
 
@@ -117,7 +117,7 @@ class BlogListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Blog'
+        context["title"] = "Blog"
         return context
 
     def get_queryset(self):
@@ -131,7 +131,7 @@ class BlogDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Page blog'
+        context["title"] = "Page blog"
         return context
 
     def get_object(self, queryset=None):
@@ -142,14 +142,18 @@ class BlogDetailView(DetailView):
 
 
 class BlogCreateView(LoginRequiredMixin, CreateView):
-    login_url = 'users:login'
     model = Blog
-    fields = ['title', 'image', 'status', 'product', ]
-    success_url = reverse_lazy('catalog:blog')
+    fields = [
+        "title",
+        "image",
+        "status",
+        "product",
+    ]
+    success_url = reverse_lazy("catalog:blog")
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Create blog'
+        context["title"] = "Create blog"
         return context
 
     def form_valid(self, form):
@@ -161,25 +165,28 @@ class BlogCreateView(LoginRequiredMixin, CreateView):
 
 
 class BlogUpdateView(LoginRequiredMixin, UpdateView):
-    login_url = 'users:login'
     model = Blog
-    fields = ['title', 'image', 'status', 'product', ]
+    fields = [
+        "title",
+        "image",
+        "status",
+        "product",
+    ]
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Update blog'
+        context["title"] = "Update blog"
         return context
 
     def get_success_url(self):
-        return reverse('catalog:blog_info', args=[self.object.product.pk])
+        return reverse("catalog:blog_info", args=[self.object.product.pk])
 
 
 class BlogDeleteView(LoginRequiredMixin, DeleteView):
-    login_url = 'users:login'
     model = Blog
-    success_url = reverse_lazy('catalog:blog')
+    success_url = reverse_lazy("catalog:blog")
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Delete blog'
+        context["title"] = "Delete blog"
         return context
