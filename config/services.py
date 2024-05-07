@@ -14,11 +14,11 @@ def get_key(key):
 
 def get_products_from_cache(model):
     if not CACHE_ENABLED:
-        return model.objects.filter(is_published=True)
+        return model.objects.all()
     key = get_key(model.__name__)
     model_data = cache.get(key)
     if model_data is not None:
         return model_data
-    model_data = model.objects.filter(is_published=True)
+    model_data = model.objects.all()
     cache.set(key, model_data)
     return model_data

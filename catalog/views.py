@@ -21,7 +21,7 @@ class ProductListView(ListView):
         context = super().get_context_data(**kwargs)
         context["title"] = "Main page"
         context["description"] = "Auto parts"
-        for product in context.get("object_list"):
+        for product in context.get("object_list").filter(is_published=True):
             product.version = product.version_set.filter(is_active_version=True).first()
         return context
 
