@@ -8,15 +8,14 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 
 from catalog.forms import ProductForm, ProductModeratorForm, VersionForm
 from catalog.models import Product, Blog, Version
+from config.services import get_products_from_cache
 
 
 class ProductListView(ListView):
     model = Product
 
     def get_queryset(self):
-        queryset = super().get_queryset()
-        queryset = queryset.filter(is_published=True)
-        return queryset
+        return get_products_from_cache(self.model)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
