@@ -87,9 +87,9 @@ class ProductUpdateView(LoginRequiredMixin, UpdateView):
         if user == self.object.owner:
             return ProductForm
         if (
-            user.has_perm("catalog.cancel_is_published")
-            and user.has_perm("catalog.edit_description")
-            and user.has_perm("catalog.edit_category")
+                user.has_perm("catalog.cancel_is_published")
+                and user.has_perm("catalog.edit_description")
+                and user.has_perm("catalog.edit_category")
         ):
             return ProductModeratorForm
         raise PermissionDenied
@@ -114,11 +114,7 @@ class ContactView(TemplateView):
 
 class BlogListView(ListView):
     model = Blog
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["title"] = "Blog"
-        return context
+    extra_context = {"title": "Blog"}
 
     def get_queryset(self):
         queryset = super().get_queryset()
@@ -128,11 +124,7 @@ class BlogListView(ListView):
 
 class BlogDetailView(DetailView):
     model = Blog
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["title"] = "Page blog"
-        return context
+    extra_context = {"title": "Page blog"}
 
     def get_object(self, queryset=None):
         self.object = super().get_object(queryset)
@@ -143,18 +135,9 @@ class BlogDetailView(DetailView):
 
 class BlogCreateView(LoginRequiredMixin, CreateView):
     model = Blog
-    fields = [
-        "title",
-        "image",
-        "status",
-        "product",
-    ]
+    fields = ["title", "image", "status", "product", ]
     success_url = reverse_lazy("catalog:blog")
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["title"] = "Create blog"
-        return context
+    extra_context = {"title": "Create blog"}
 
     def form_valid(self, form):
         if form.is_valid():
@@ -166,17 +149,8 @@ class BlogCreateView(LoginRequiredMixin, CreateView):
 
 class BlogUpdateView(LoginRequiredMixin, UpdateView):
     model = Blog
-    fields = [
-        "title",
-        "image",
-        "status",
-        "product",
-    ]
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["title"] = "Update blog"
-        return context
+    fields = ["title", "image", "status", "product", ]
+    extra_context = {"title": "Update blog"}
 
     def get_success_url(self):
         return reverse("catalog:blog_info", args=[self.object.product.pk])
@@ -185,8 +159,4 @@ class BlogUpdateView(LoginRequiredMixin, UpdateView):
 class BlogDeleteView(LoginRequiredMixin, DeleteView):
     model = Blog
     success_url = reverse_lazy("catalog:blog")
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["title"] = "Delete blog"
-        return context
+    extra_context = {"title": "Delete blog"}
