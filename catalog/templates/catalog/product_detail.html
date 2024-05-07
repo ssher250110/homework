@@ -1,0 +1,50 @@
+{% extends 'catalog/base.html' %}
+{% load my_tags %}
+
+{% block title_page %}
+    {{ object.name }}
+{% endblock %}
+
+{% block title %}
+    <h2 class="display-4 fw-bold">{{ title }}</h2>
+{% endblock %}
+
+{% block content %}
+    <div class="album py-5 bg-body-tertiary">
+        <div class="container-fluid">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <img src="{{ object.photo | mymedia }}"
+                             style="height: 300px;width: auto;">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ object.name }}</h5>
+                            <p class="card-text">{{ object.description }}</p>
+                            <h4 class="card-title pricing-card-title">Price: {{ object.price }}</h4>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">Category product: {{ object.category }}</li>
+                                <li class="list-group-item">Date of creation: {{ object.created_at }}</li>
+                                <li class="list-group-item">Date of update: {{ object.updated_at }}</li>
+                                <li class="list-group-item">Name version: {{ version.name_version }}</li>
+                                <li class="list-group-item">Number version: {{ version.number_version }}</li>
+                            </ul>
+                            <div class="btn-group">
+                                <a class="btn btn--sm btn-outline-secondary"
+                                   href="{% url 'catalog:index' %}" role="button">Main
+                                </a>
+                                {% if perms.catalog.cancel_is_published and perms.catalog.edit_description and perms.catalog.edit_category or user == product.owner %}
+                                <a class="btn btn--sm btn-outline-secondary"
+                                   href="{% url 'catalog:update_product' object.id %}" role="button">Update</a>
+                                {% endif %}
+                                {% if user.is_superuser%}
+                                <a class="btn btn--sm btn-outline-secondary"
+                                   href="{% url 'catalog:delete_product' object.id %}" role="button">Delete</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
